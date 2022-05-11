@@ -1,0 +1,30 @@
+server:
+  port: 9093
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    config:
+      uri: http://localhost:8081
+      username: nttdata
+      password: ju4an29
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: service-credit
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/credit/**
+
+        - id: service-client
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/client/**
+            
+        - id: service-account
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/account/**
+         
